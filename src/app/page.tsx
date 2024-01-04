@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { Button, ButtonGroup } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 
 import Image from "next/image";
 import icon from "./catImg.jpg";
@@ -18,11 +18,11 @@ interface Facts {
 export default function Home() {
   const [dailyFact, setDailyFact] = useState<string>("");
   const [favorites, setFavorites] = useState<string[]>([]);
-  const favRef = useRef([]);
+  const favRef = useRef<string[]>([]);
 
   const getRandomItem = (array: Facts[]) => {
     if (array.length === 0) {
-      return undefined;
+      return null;
     }
 
     const randomIndex = Math.floor(Math.random() * array.length);
@@ -32,13 +32,13 @@ export default function Home() {
   const listFacts = async () => {
     try {
       const response = await fetch("https://cat-fact.herokuapp.com/facts");
-      const catFacts = await response.json();
+      const catFacts: Facts[] = await response.json();
 
       const resultArray = catFacts.filter(
         (element) => !favRef.current.includes(element.text)
       );
       const randomItem = getRandomItem(resultArray);
-      setDailyFact(randomItem?.text);
+      randomItem !== null && setDailyFact(randomItem?.text);
     } catch (error) {
       console.error("error here");
     }
