@@ -20,7 +20,7 @@ export default function Home() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const favRef = useRef<string[]>([]);
 
-  const getRandomItem = (array: Facts[]) => {
+  const getRandomItem = (array: Facts[] = []): Facts | null => {
     if (array.length === 0) {
       return null;
     }
@@ -68,8 +68,13 @@ export default function Home() {
   //unit test
   return (
     <main className='flex min-h-screen flex-col items-center p-44'>
-      <Image width='100' alt='icon' src={icon} />
-      <Button onClick={() => reloadFacts()} color='danger' aria-label='Like'>
+      <Image width='100' alt='Cat Image' src={icon} />
+      <Button
+        onClick={() => reloadFacts()}
+        color='danger'
+        aria-label='Reload'
+        isIconOnly
+      >
         <RefreshIcon />
       </Button>
       <h1 style={{ marginTop: "30px" }}> Cat Facts:</h1>
@@ -79,6 +84,7 @@ export default function Home() {
           onClick={() => addToFavorites(dailyFact)}
           color='danger'
           aria-label='Like'
+          isIconOnly
         >
           <HeartIcon />
         </Button>
