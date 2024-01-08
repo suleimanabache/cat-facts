@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Button } from "@nextui-org/react";
 
 import Image from "next/image";
-import icon from "./catImg.jpg";
+// import Icon from "./assets/catImg.jpg";
 import { RefreshIcon } from "./components/RefreshIcon";
 import { HeartIcon } from "./components/HeartIcon";
 
@@ -58,7 +58,7 @@ const Home = () => {
   };
   return (
     <main className='flex min-h-screen flex-col items-center p-44'>
-      <Image width='100' alt='Cat Image' src={icon} />
+      <Image width='100' alt='Cat Image' src='./assets/catImg.jpg' />
       <div style={{ marginTop: "30px" }}>
         <Button
           onClick={() => reloadFacts()}
