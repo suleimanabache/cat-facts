@@ -15,7 +15,7 @@ interface Facts {
   used: string;
 }
 
-export default function Home() {
+export const Home = () => {
   const [dailyFact, setDailyFact] = useState<string>("");
   const [favorites, setFavorites] = useState<string[]>([]);
   const favRef = useRef<string[]>([]);
@@ -38,7 +38,7 @@ export default function Home() {
         (element) => !favRef.current.includes(element.text)
       );
       const randomItem = getRandomItem(resultArray);
-      randomItem !== null && setDailyFact(randomItem?.text);
+      setDailyFact(randomItem?.text);
     } catch (error) {
       console.error("error here");
     }
@@ -57,38 +57,35 @@ export default function Home() {
     favRef.current = [...favRef.current, factText ?? ""];
     listFacts();
   };
-  //1st
-  //add a reload button to reload facts
-  //add favourite button to move cat facts to favourite screen
-  //2nd
-  //on fav screen add remove cat facts to return facts to facts screen
-  //3rd
-  //push to git
-  //4th
-  //unit test
   return (
     <main className='flex min-h-screen flex-col items-center p-44'>
       <Image width='100' alt='Cat Image' src={icon} />
-      <Button
-        onClick={() => reloadFacts()}
-        color='danger'
-        aria-label='Reload'
-        isIconOnly
-      >
-        <RefreshIcon />
-      </Button>
-      <h1 style={{ marginTop: "30px" }}> Cat Facts:</h1>
-      <ul style={{ marginTop: "30px" }}>{dailyFact}</ul>
-      <ul>
+      <div style={{ marginTop: "30px" }}>
         <Button
-          onClick={() => addToFavorites(dailyFact)}
+          onClick={() => reloadFacts()}
           color='danger'
-          aria-label='Like'
+          aria-label='Reload'
           isIconOnly
         >
-          <HeartIcon />
+          <RefreshIcon />
         </Button>
-      </ul>
+      </div>
+
+      <h1 style={{ marginTop: "30px" }}> Cat Facts:</h1>
+      <div style={{ marginTop: "30px" }}>
+        {" "}
+        <ul style={{ marginTop: "30px" }}>
+          {dailyFact}
+          <Button
+            onClick={() => addToFavorites(dailyFact)}
+            color='danger'
+            aria-label='Like'
+            isIconOnly
+          >
+            <HeartIcon />
+          </Button>
+        </ul>
+      </div>
       <div className='favorites-container'>
         <h2 style={{ marginTop: "30px" }}>Favorites:</h2>
         <ul>
@@ -101,4 +98,4 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
