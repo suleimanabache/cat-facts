@@ -8,26 +8,25 @@ import icon from "./catImg.jpg";
 import { RefreshIcon } from "./components/RefreshIcon";
 import { HeartIcon } from "./components/HeartIcon";
 
-interface Facts {
+export interface Facts {
   _id: string;
   text: string;
   createdAt: string;
   used: string;
 }
 
+export const getRandomItem = (array: Facts[] = []): Facts | null => {
+  if (array.length === 0) {
+    return null;
+  }
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+};
+
 export const Home = () => {
   const [dailyFact, setDailyFact] = useState<string>("");
   const [favorites, setFavorites] = useState<string[]>([]);
   const favRef = useRef<string[]>([]);
-
-  const getRandomItem = (array: Facts[] = []): Facts | null => {
-    if (array.length === 0) {
-      return null;
-    }
-
-    const randomIndex = Math.floor(Math.random() * array.length);
-    return array[randomIndex];
-  };
 
   const listFacts = async () => {
     try {
