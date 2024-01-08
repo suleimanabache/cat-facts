@@ -23,7 +23,7 @@ export const getRandomItem = (array: Facts[] = []): Facts | null => {
   return array[randomIndex];
 };
 
-export const Home = () => {
+const Home = () => {
   const [dailyFact, setDailyFact] = useState<string>("");
   const [favorites, setFavorites] = useState<string[]>([]);
   const favRef = useRef<string[]>([]);
@@ -98,3 +98,5 @@ export const Home = () => {
     </main>
   );
 };
+
+export default Home;
