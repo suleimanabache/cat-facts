@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { Button } from "@nextui-org/react";
 
 import Image from "next/image";
 import { RefreshIcon } from "./components/RefreshIcon";
@@ -57,18 +56,13 @@ const Home = () => {
     listFacts();
   };
   return (
-    <main className='flex min-h-screen flex-col items-center p-44'>
+    <main className='flex min-h-screen flex-col items-center pt-4'>
       <Image
         width={100}
         height={200}
         alt='Cat Image'
         src='/assets/catImg.jpg'
       />
-      <div style={{ marginTop: "30px" }}>
-        <button type='button' onClick={() => reloadFacts()} aria-label='Reload'>
-          <RefreshIcon />
-        </button>
-      </div>
 
       <h1 className='mt-8 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl'>
         Random Cat Fact:
@@ -80,14 +74,15 @@ const Home = () => {
         </p>
       </div>
 
-      <div className='flex min-h-screen flex-col items-center p-14'>
-        <ul className='mt-8 flex items-center'>
+      <div className='items-center pt-10'>
+        <ul className='mt-8 flex items-center max-w-96'>
           <li>{dailyFact}</li>
+        </ul>
+        <div className='flex space-x-2'>
           <button
             type='button'
             onClick={() => reloadFacts()}
             aria-label='Reload'
-            className='ml-2'
           >
             <RefreshIcon />
           </button>
@@ -95,20 +90,19 @@ const Home = () => {
             type='button'
             onClick={() => addToFavorites(dailyFact!)}
             aria-label='Like'
-            className='ml-2'
           >
             <HeartIcon />
           </button>
-        </ul>
+        </div>
       </div>
 
-      <div className='flex min-h-screen flex-col items-center p-44'>
+      <div className='flex min-h-screen flex-col items-center'>
         <h1 className='mt-8 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl'>
           Favorites:
         </h1>
         <ul>
           {favorites.map((favorite, index) => (
-            <li key={index} style={{ marginBottom: "20px" }}>
+            <li key={index} className='mt-8 flex items-center max-w-96'>
               {favorite}
             </li>
           ))}
